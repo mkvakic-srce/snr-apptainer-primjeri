@@ -1,0 +1,14 @@
+Bootstrap: docker
+From: ubuntu:22.04
+
+%post
+
+  # osvježi
+  apt update -y
+  apt upgrade -y
+
+  # apt install
+  apt install -y python3-pip
+
+  # pip3 install
+  pip3 install pypng
