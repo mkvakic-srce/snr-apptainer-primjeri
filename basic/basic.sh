@@ -15,7 +15,7 @@ apptainer shell --writable --fakeroot ubuntu-22.04.sandbox
 # osvježi i instaliraj pakete unutar sandbox kontejnera
 apt update -y
 apt install python3-pip -y
-python3 -m pip install pypng
+python3 -m pip install numpy tqdm torch torchvision
 
 # izađi iz kontejnera
 exit

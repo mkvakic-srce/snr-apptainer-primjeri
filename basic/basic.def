@@ -11,4 +11,4 @@ From: ubuntu:22.04
   apt install -y python3-pip
 
   # pip3 install
-  pip3 install pypng
+  pip3 install numpy tqdm torch torchvision
