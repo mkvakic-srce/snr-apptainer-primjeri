@@ -1,0 +1,11 @@
+Bootstrap: docker
+From: nvcr.io/nvidia/pytorch:22.12-py3
+
+%post  
+
+  pip3 install transformers
+
+%runscript
+
+  export CUDA_VISIBLE_DEVICES=$(nvidia-smi -L | egrep "${CUDA_VISIBLE_DEVICES//,/|}" | egrep -o "GPU [0-3]" | egrep -o "[0-3]" | tr "\n" ",")
+  python $@
