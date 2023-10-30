@@ -1,0 +1,16 @@
+Bootstrap: docker
+From: condaforge/mambaforge:latest
+
+%files
+
+  conda.yml
+
+%post
+
+  mamba env update -n base --file /conda.yml
+
+%runscript
+
+  pattern=$( echo ${CUDA_VISIBLE_DEVICES} | tr ',' '|' )
+  export CUDA_VISIBLE_DEVICES=$( nvidia-smi -L | egrep "${pattern}" | egrep -o "GPU [0-3]" | egrep -o "[0-3]" | tr "\n" "," )
+  python $@

@@ -1,0 +1,9 @@
+channels:
+  - pytorch
+  - nvidia
+dependencies:
+  - pytorch 
+  - torchvision 
+  - torchaudio 
+  - pytorch-cuda=12.1
+  - transformers

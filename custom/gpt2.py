@@ -10,7 +10,7 @@ model = AutoModelWithLMHead.from_pretrained('./macedonizer/hr-gpt2')
 model.to('cuda')
 
 # generiraj
-input_text = 'Danas ću nakon posla'
+input_text = 'Od sutra ću'
 
 encoded_input = tokenizer(input_text,
                           return_tensors="pt")
@@ -21,8 +21,7 @@ output = model.generate(**encoded_input,
                         do_sample=True,
                         top_k=50,
                         max_length=100,
-                        top_p=0.95,
-                        num_return_sequences=1)
+                        top_p=0.95)
 
 decoded_output = tokenizer.decode(output[0],
                                   skip_special_tokens=True)
