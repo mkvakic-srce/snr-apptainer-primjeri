@@ -1,0 +1,24 @@
+Bootstrap: docker
+From: rockylinux:8
+ 
+%files
+
+  mpi.c /myapp/
+ 
+%environment
+
+  export LD_LIBRARY_PATH=/usr/lib64/mpich/lib:$LD_LIBRARY_PATH
+  export PATH=/usr/lib64/mpich/bin:$PATH
+ 
+%post
+ 
+  # osvježi i instaliraj knjižnice za kompilaciju
+  dnf update -y
+  dnf install mpich-devel -y
+ 
+  # namjesti okolinu za razvoj MPICHom
+  export LD_LIBRARY_PATH=/usr/lib64/mpich/lib:$LD_LIBRARY_PATH
+  export PATH=/usr/lib64/mpich/bin:$PATH
+   
+  # prevedi aplikaciju u izvršnu datoteku
+  mpicc -o /myapp/mpi /myapp/mpi.c
