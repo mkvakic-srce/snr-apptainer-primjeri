@@ -1,0 +1,10 @@
+Bootstrap: docker
+From: r-base:4.3.0
+
+%post
+
+  R --slave -e 'install.packages("dplyr")'
+
+%runscript
+
+  Rscript $@
