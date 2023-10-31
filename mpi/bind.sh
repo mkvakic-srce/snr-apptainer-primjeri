@@ -1,6 +1,6 @@
 
 #PBS -q cpu-radionica
-#PBS -l select=2:ncpus=2:mpiprocs=2
+#PBS -l select=2:ncpus=1
 #PBS -l place=scatter
 
 cd ${PBS_O_WORKDIR:-""}
@@ -24,18 +24,23 @@ export APPTAINERENV_LD_LIBRARY_PATH="${CRAY_LD_LIBRARY_PATH}:${LD_LIBRARY_PATH}:
 # print ldd ovisnosti izvršne datoteke
 echo "----- ldd /myapp/mpi -----"
 apptainer exec \
+  bind.sif \
+    ldd /myapp/mpi
+
+echo "----- ldd /myapp/mpi + --bind -----"
+apptainer exec \
   --bind /opt \
   --bind /run \
   --bind /usr/lib64 \
-  mpi.sif \
+  bind.sif \
     ldd /myapp/mpi
 
-# izvršavanje kontejnera mpi-test.sif s aplikacijom mpiexec modula cray-pals
+# izvršavanje kontejnera bind.sif s aplikacijom mpiexec modula cray-pals
 echo "----- mpiexec ... /myapp/mpi -----"
 mpiexec --no-transfer \
   apptainer exec \
     --bind /opt \
     --bind /run \
     --bind /usr/lib64 \
-    mpi.sif \
+    bind.sif \
       /myapp/mpi

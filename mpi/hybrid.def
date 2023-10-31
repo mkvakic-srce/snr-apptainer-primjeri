@@ -1,0 +1,15 @@
+Bootstrap: docker
+From: ubuntu:22.04
+ 
+%files
+
+  mpi.c /myapp/
+ 
+%post
+ 
+  # osvježi i instaliraj knjižnice za prevođenje
+  apt update -y
+  apt install -y openmpi-bin libopenmpi-dev
+
+  # prevedi aplikaciju u izvršnu datoteku
+  mpicc -o /myapp/mpi /myapp/mpi.c

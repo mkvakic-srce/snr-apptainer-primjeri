@@ -12,7 +12,7 @@ From: rockylinux:8
  
 %post
  
-  # osvježi i instaliraj knjižnice za kompilaciju
+  # osvježi i instaliraj knjižnice za prevođenje
   dnf update -y
   dnf install mpich-devel -y
  
