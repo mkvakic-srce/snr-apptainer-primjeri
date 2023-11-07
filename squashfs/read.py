@@ -3,24 +3,24 @@ import glob
 import tqdm
 import random
 import numpy as np
-
-from torchvision.datasets import ImageFolder
-from torchvision.transforms import ToTensor
-from torch.utils.data import DataLoader
+from PIL import Image
 
 # direktoriji
 directory_lustre = 'mnist_png/training'
 directory_squash = '/mnist_png/training'
 
-# učitaj slike s Lustrea
-def load_epoch(directory):
-    dataset = ImageFolder(directory, transform=ToTensor())
-    loader = DataLoader(dataset, batch_size=128)
-    for batch in tqdm.tqdm(loader):
-        continue
+# datoteke
+files_lustre = glob.glob(directory_lustre + '/*/*.png')
+files_squash = glob.glob(directory_squash + '/*/*.png')
 
-print('--- Učitavanje s Lustrea ---')
-load_epoch(directory_lustre)
+# funkcija za učitavanje slika
+def load_images(files):
+    for file in tqdm.tqdm(files):
+        image = Image.open(file)
+        values = np.array(image.getdata())
 
-print('--- Učitavanje sa squash imagea ---')
-load_epoch(directory_squash)
+print('--- Učitavanje s Lustrea - sekvencijalno ---')
+load_images(files_lustre)
+
+print('--- Učitavanje sa squash imagea - sekvencijalno ---')
+load_images(files_squash)
