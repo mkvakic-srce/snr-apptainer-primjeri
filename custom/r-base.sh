@@ -4,4 +4,4 @@
 
 cd ${PBS_O_WORKDIR:-""}
 
-./r-base.sif iris.R
+./r-base.sif r-base.R
