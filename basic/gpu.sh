@@ -4,4 +4,4 @@
 
 cd ${PBS_O_WORKDIR:-""}
 
-apptainer exec --nv ${HOME}/ubuntu-22.04.sif python3 run-gpu.py
+apptainer exec --nv ${HOME}/ubuntu-22.04.sif python3 gpu.py
