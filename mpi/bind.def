@@ -15,6 +15,8 @@ From: rockylinux:8
   # osvježi i instaliraj knjižnice za prevođenje
   dnf update -y
   dnf install mpich-devel -y
+  dnf install wget -y
+  dnf groupinstall "Development Tools" -y
  
   # namjesti okolinu za razvoj MPICHom
   export LD_LIBRARY_PATH=/usr/lib64/mpich/lib:$LD_LIBRARY_PATH
@@ -22,3 +24,15 @@ From: rockylinux:8
    
   # prevedi aplikaciju u izvršnu datoteku
   mpicc -o /myapp/mpi /myapp/mpi.c
+
+  # skini i prevedi osu_bw za testiranje propusnosti
+  wget -q http://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-benchmarks-5.3.2.tar.gz
+  tar xvf osu-micro-benchmarks-5.3.2.tar.gz
+  cd osu-micro-benchmarks-5.3.2
+  ./configure CC=mpicc
+  make
+  make install
+
+%runscript
+
+  /usr/local/libexec/osu-micro-benchmarks/mpi/pt2pt/osu_bw

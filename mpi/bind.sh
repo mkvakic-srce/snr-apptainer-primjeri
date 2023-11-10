@@ -44,3 +44,12 @@ mpiexec --no-transfer \
     --bind /usr/lib64 \
     bind.sif \
       /myapp/mpi
+
+# testiranje propusnosti
+echo "----- mpiexec ... osu_bw -----"
+mpiexec --no-transfer \
+  apptainer run \
+    --bind /opt \
+    --bind /run \
+    --bind /usr/lib64 \
+    bind.sif

@@ -10,6 +10,20 @@ From: ubuntu:22.04
   # osvježi i instaliraj knjižnice za prevođenje
   apt update -y
   apt install -y openmpi-bin libopenmpi-dev
+  apt install -y wget
+  apt install -y build-essential
 
   # prevedi aplikaciju u izvršnu datoteku
   mpicc -o /myapp/mpi /myapp/mpi.c
+
+  # skini i prevedi osu_bw za testiranje propusnosti
+  wget -q http://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-benchmarks-5.3.2.tar.gz
+  tar xvf osu-micro-benchmarks-5.3.2.tar.gz
+  cd osu-micro-benchmarks-5.3.2
+  ./configure CC=mpicc
+  make
+  make install
+
+%runscript
+
+  /usr/local/libexec/osu-micro-benchmarks/mpi/pt2pt/osu_bw
