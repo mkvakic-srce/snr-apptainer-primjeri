@@ -19,8 +19,16 @@ def load_images(files):
         image = Image.open(file)
         values = np.array(image.getdata())
 
+# učitavanje s Lustrea
 print('--- Učitavanje s Lustrea - sekvencijalno ---')
 load_images(files_lustre)
 
+print('--- Učitavanje s Lustrea - nasumično ---')
+load_images(random.sample(files_lustre, len(files_lustre)))
+
+# učitavanje sa squash imagea
 print('--- Učitavanje sa squash imagea - sekvencijalno ---')
 load_images(files_squash)
+
+print('--- Učitavanje sa squash imagea - nasumično ---')
+load_images(random.sample(files_squash, len(files_squash)))
